@@ -2,6 +2,8 @@
 
 namespace PHPCR\Util;
 
+use Rhumsaa\Uuid\Uuid;
+
 /**
  * Static helper functions to deal with Universally Unique IDs (UUID).
  *
@@ -13,8 +15,9 @@ class UUIDHelper
     /**
      * Checks if the string could be a UUID.
      *
-     * @param  string  $id Possible uuid
-     * @return boolean True if the test was passed, else false.
+     * @param string $id Possible uuid
+     *
+     * @return bool True if the test was passed, else false.
      */
     public static function isUUID($id)
     {
@@ -38,10 +41,8 @@ class UUIDHelper
      */
     public static function generateUUID()
     {
-        $data = openssl_random_pseudo_bytes(16);
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
+        $uuid4 = Uuid::uuid4();
 
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+        return $uuid4->toString();
     }
 }

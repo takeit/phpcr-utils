@@ -32,11 +32,6 @@ class UUIDHelper
     /**
      * Generate a UUID.
      *
-     * This UUID can not be guaranteed to be unique within the repository.
-     * Ensuring this is the responsibility of the repository implementation.
-     *
-     * See: http://stackoverflow.com/a/15875555/1316350
-     *
      * @return string a random UUID
      */
     public static function generateUUID()
